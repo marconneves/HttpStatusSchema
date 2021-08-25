@@ -1,0 +1,32 @@
+stages:
+  - test
+  - build
+  - deploy
+
+workflow:
+  rules:
+    # As part of the process of creating RCs automatically, we update stable
+    # branches with the changes of the most recent production deployment. The
+    # merge requests used for this merge a branch release-tools/X into a stable
+    # branch. For these merge requests we don't want to run any pipelines, as
+    # they serve no purpose and will run anyway when the changes are merged.
+    - if: '$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^release-tools\/\d+\.\d+\.\d+-rc\d+$/ && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^[\d-]+-stable(-ee)?$/'
+      when: never
+    # For merge requests, create a pipeline.
+    - if: '$CI_MERGE_REQUEST_IID'
+    # For `$CI_DEFAULT_BRANCH` branch, create a pipeline (this includes on schedules, pushes, merges, etc.).
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    # For tags, create a pipeline.
+    - if: '$CI_COMMIT_TAG'
+    # For all moments.
+    - if: '$CI_COMMIT_BRANCH'
+    # For stable, auto-deploy, and security branches, create a pipeline.
+    - if: '$CI_COMMIT_BRANCH =~ /^[\d-]+-stable(-ee)?$/'
+    - if: '$CI_COMMIT_BRANCH =~ /^\d+-\d+-auto-deploy-\d+$/'
+    - if: '$CI_COMMIT_BRANCH =~ /^security\//'
+
+variables:
+  NODE_ENV: "test"
+
+include:
+  - local: .gitlab/ci/*.gitlab-ci.yml

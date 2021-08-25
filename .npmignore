@@ -1,0 +1,17 @@
+.github/
+.vscode/
+.editorconfig
+.gitignore
+node_modules/
+yarn.lock
+tsconfig.json
+
+.eslintignore
+.eslintrc.json
+prettier.config.js
+
+# ignore the .ts files
+*.ts
+
+# include the .d.ts files
+!*.d.ts

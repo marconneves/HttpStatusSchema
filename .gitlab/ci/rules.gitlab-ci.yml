@@ -1,0 +1,73 @@
+##############
+# Conditions #
+##############
+.if-is-all-commit: &if-is-all-commit
+  if: '$CI_COMMIT_REF_NAME'
+
+.if-is-production-branch: &if-is-production-branch
+  if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
+
+.if-is-develop-branch: &if-is-develop-branch
+  if: '$CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "push"'
+
+.if-is-tag: &if-is-tag
+  if: '$CI_COMMIT_TAG'
+
+.if-default-branch-or-tag: &if-default-branch-or-tag
+  if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH || $CI_COMMIT_TAG'
+
+.if-auto-deploy-branches: &if-auto-deploy-branches
+  if: '$CI_COMMIT_REF_NAME =~ /^\d+-\d+-auto-deploy-\d+$/'
+
+.if-is-merge-request: &if-is-merge-request
+  if: '$CI_MERGE_REQUEST_IID'
+
+.if-is-hotfix-to-main: &if-is-hotfix-to-main
+  if: '$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^hotfix\// && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+
+.if-is-feat-or-fix-to-develop: &if-is-feat-or-fix-to-develop
+  if: '($CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^feature\// || $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^fix\//) && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
+
+####################
+# Changes patterns #
+####################
+
+.if-change-in-server: &if-change-in-server
+  - "src/*"
+
+#######################
+# Test a code_quality #
+#######################
+
+.filter:rules:test-code-quality:
+  rules:
+    - <<: *if-is-hotfix-to-main
+    - <<: *if-is-production-branch
+    - <<: *if-is-feat-or-fix-to-develop
+    - <<: *if-is-develop-branch
+
+
+##############################
+# Build a server repository #
+##############################
+
+.filter:rules:build-image-gcp:
+  rules:
+    - <<: *if-is-production-branch
+    - <<: *if-is-develop-branch
+
+##############################
+# Deploy on gcp #
+##############################
+
+.filter:rules:push-production-branch:
+  rules:
+    - <<: *if-is-production-branch
+    - <<: *if-is-merge-request
+      when: never
+
+.filter:rules:push-develop-branch:
+  rules:
+    - <<: *if-is-develop-branch
+    - <<: *if-is-merge-request
+      when: never
