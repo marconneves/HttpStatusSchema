@@ -1,8 +1,9 @@
 {
   "name": "http-status-schema",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Schema of errors http in string name",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": "git@github.com:MarconWillian/HttpStatusSchema.git",
   "author": "Marcon Willian oi@marcon.run",
   "license": "MIT",

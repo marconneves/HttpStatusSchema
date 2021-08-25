@@ -12,25 +12,28 @@ $ npm install http-status-schema
 
 ## Features
 
-  * Enviar SMS
-  * Verificar Status de SMS
-  * Verificar Quantidade de SMS
+- Declarations Types of name status error for functions
 
-## Config Start
+## Examples
 
 First you need import the package for your project:
 
-```
-const http-status-schema = require('http-status-schema');
-```
+```typescript
+import { selectStatus, StatusName } from 'http-status-schema';
 
-  You need config with yours access:
+
+class AppError {
+  status: number;
+
+  message: string;
+
+  constructor(status: StatusName , message: string){
+    this.status = selectStatus(status); // Convert the name of status to number
+    this.message = message;
+  }
+}
 
 ```
-http-status-schema.config({user: "YOUR_USER", pass: "YOUR_PASS"});
-```
-
-## Examples
 
 
 ## License
