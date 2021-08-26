@@ -1,10 +1,10 @@
 {
-  "name": "http-status-schema",
+  "name": "stypes",
   "version": "1.0.3",
-  "description": "Schema of errors http in string name",
+  "description": "HTTP Status Code + TypeScript, your status code and function of HTTP Status Codes",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "repository": "git@github.com:MarconWillian/HttpStatusSchema.git",
+  "repository": "git@github.com:MarconWillian/sTypes.git",
   "author": "Marcon Willian oi@marcon.run",
   "license": "MIT",
   "publishConfig": {
@@ -26,5 +26,6 @@
     "prettier": "^2.1.1",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
-  }
+  },
+  "keywords": ["http-status-code", "status-code", "status-code-typescript", "http-code"]
 }
