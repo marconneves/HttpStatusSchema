@@ -1,7 +1,7 @@
 {
-  "name": "stypes",
+  "name": "types-code",
   "version": "1.0.3",
-  "description": "HTTP Status Code + TypeScript, your status code and function of HTTP Status Codes",
+  "description": "TypeScript + HTTP Status Code, your status code and function of HTTP Status Codes",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": "git@github.com:MarconWillian/sTypes.git",
