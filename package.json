@@ -1,6 +1,6 @@
 {
-  "name": "types-code",
-  "version": "1.0.3",
+  "name": "http-status-schema",
+  "version": "1.0.4",
   "description": "TypeScript + HTTP Status Code, your status code and function of HTTP Status Codes",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
