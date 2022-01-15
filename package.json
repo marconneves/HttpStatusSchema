@@ -1,11 +1,11 @@
 {
   "name": "http-status-schema",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "TypeScript + HTTP Status Code, your status code and function of HTTP Status Codes",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "repository": "git@github.com:MarconWillian/sTypes.git",
-  "author": "Marcon Willian oi@marcon.run",
+  "repository": "git@github.com:MarconWillian/HttpStatusSchema.git",
+  "author": "Marcon Willian <oi@marcon.run>",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
